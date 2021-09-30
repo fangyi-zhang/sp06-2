@@ -15,7 +15,8 @@ split_punct <- function(book,string){
   return (t1)
 }
 
-del_1<-split_punct(a,',')
+
+del_11<-split_punct(a,',')
 del_2<-split_punct(del_1,'.')
 del_3<-split_punct(del_2,';')
 del_4<-split_punct(del_3,'!')
