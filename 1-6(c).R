@@ -30,6 +30,13 @@ c<-unique(b)
 d<-match(b,c)
 h<-tabulate(d)
 
+x=0
+for (i in 1:length(h)) {
+  if (h[i]>89) 
+    x=x+1
+}
+x
+
 
 
 ##7
