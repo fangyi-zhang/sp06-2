@@ -90,8 +90,11 @@ for (i in 1:length(q11) / 2) {
 A <- matrix(0, length(b), length(b))
 for (i in 1:length(b)) {
   for (j in 1:length(b)) {
-    A[i, j] = A0[i, j] / sum(A0[i, ])
+    A[i, j] <- A0[i, j] / sum(A0[i, ])
   }
 }
+
+##8
+
 
 
