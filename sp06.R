@@ -95,6 +95,9 @@ for (i in 1:length(b)) {
 }
 
 ##8
+kkk<-sample(b,50,replace=FALSE,prob=NULL)
+cat(kkk)
+
 
 
 
