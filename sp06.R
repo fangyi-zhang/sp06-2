@@ -52,4 +52,8 @@ for (i in 1:length(g)) {
   b[i]<-c[g[i]]
 } 
 
+
+##7
+q<-match(text,b)
+
   
