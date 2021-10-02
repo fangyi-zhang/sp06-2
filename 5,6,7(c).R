@@ -56,8 +56,23 @@ b
 
 ##7
 q<-match(text,b)
+q1<-cbind(q[1:1305974],q[2:1305975])
+q2<-rowSums(is.na(q1))
 
+l<-numeric(0)
+x=0
+for (i in 1:length(q2)) {
+  if (q2[i]==0){
+    x=x+1;l[x]<-i}else 
+    {x=x+0}
+  
+}
 
+q11<-matrix(nrow=964810,ncol=2)
+for (i in 1:length(l)) {
+  q11[i,]<-q1[l[i],]
+} 
+q11
 
 
 
