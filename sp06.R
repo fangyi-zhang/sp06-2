@@ -95,9 +95,11 @@ for (i in 1:length(b)) {
 }
 
 ##8
-kkk<-sample(b,50,replace=FALSE,prob=NULL)
-cat(kkk)
-
-
+index<-sample(g, 50, replace=FALSE)
+s <- numeric(0)
+for (i in 1:50) {
+  s[i]<-k[index[i]]
+}
+cat(s)
 
 
