@@ -24,15 +24,19 @@ del_5<-split_punct(del_4,':')
 del_6<-split_punct(del_5,"?")
 
 library(mgcv)
-
 text <- tolower(del_6)
-k <- uniquecombs(text, ordered = FALSE)
-k1<-attr(k, "index")
+k <- unique(text, ordered = FALSE)
+k1 <- match(text,k)
+k2 <- tabulate(k1)
+
+x=0
+for (i in 1:length(k2)) {
+  if (k2[i]>89) 
+    x=x+1
+}
 
 
-# X <- matrix(c(1,2,3,1,2,3,4,5,6,1,3,2,4,5,6,1,1,1),6,3,byrow=TRUE)
-# print(X)
-# Xu <- uniquecombs(X);Xu
-# ind <- attr(Xu,"index")
-# ## find the value for row 3 of the original from Xu
-# Xu[ind[3],];X[3,]
+(x-1000)<5
+
+
+  
