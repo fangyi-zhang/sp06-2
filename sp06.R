@@ -55,6 +55,34 @@ for (i in 1:length(g)) {
 
 ##7
 q<-match(text,b)
-q
+q1<-cbind(q[1:1305893],q[2:1305894])
+q2<-rowSums(is.na(q1))
+
+l<-numeric(0)
+x=0
+for (i in 1:length(q2)) {
+  if (q2[i]==0){
+    x=x+1;l[x]<-i}else 
+    {x=x+0}
+  
+}
+
+q11<-matrix(nrow=964810,ncol=2)
+for (i in 1:length(l)) {
+  q11[i,]<-q1[l[i],]
+} 
+
+A0<-matrix(0,1003,1003)
+for (i in 1:length(q11)/2){
+  A0[q11[i,1],q11[i,2]]<- A0[q11[i,1],q11[i,2]] + 1
+}
+
+for (i in 1:1003){
+  for (j in 1:1003){
+    A[i,j]=A0[i,j]/sum(A0[i,])
+  }
+}
+
+sum(A[1,])
 
 
