@@ -3,7 +3,6 @@ a <- scan("1581-0.txt",what="character",skip=156)
 n <- length(a)
 a <- a[-((n-2909):n)] ## strip license
 
-#remove ","……
 split_punct <- function(book,string){
   m <- grep(string, book, fixed=TRUE)
   book[m] <- paste(book[m], " %", sep="")
@@ -77,6 +76,7 @@ for (i in 1:length(q11)/2){
   A0[q11[i,1],q11[i,2]]<- A0[q11[i,1],q11[i,2]] + 1
 }
 
+
 A<-matrix(0,1003,1003)
 for (i in 1:1003){
   for (j in 1:1003){
@@ -93,5 +93,8 @@ sum(A[1,])
 
 
 
+
+=======
+>>>>>>> 6a84d3d272c5af6a48a28d9b5ae6e9d54b12d168
 
 
