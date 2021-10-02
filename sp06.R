@@ -3,15 +3,16 @@ a <- scan("1581-0.txt",what="character",skip=156)
 n <- length(a)
 a <- a[-((n-2909):n)] ## strip license
 
+#remove ","……
 split_punct <- function(book,string){
   m <- grep(string, book, fixed=TRUE)
   book[m] <- paste(book[m], " %", sep="")
   n <- paste(book, collapse=" ")
   p <- strsplit(n," ")[[1]]
   t <- gsub(string, "", p, ignore.case = FALSE, perl = FALSE,
-          fixed = TRUE, useBytes = FALSE)
+            fixed = TRUE, useBytes = FALSE)
   t1 <- gsub("%", string, t, ignore.case = FALSE, perl = FALSE,
-           fixed = TRUE, useBytes = FALSE)
+             fixed = TRUE, useBytes = FALSE)
   return (t1)
 }
 
@@ -43,17 +44,17 @@ x=0
 for (i in 1:length(k2)) {
   if (k2[i]>=90){
     x=x+1;g[x]<-i}else 
-      {x=x+0}
+    {x=x+0}
   
 }
 
 b<-numeric(0)
 for (i in 1:length(g)) {
-  b[i]<-c[g[i]]
+  b[i]<-k[g[i]]
 } 
-
 
 ##7
 q<-match(text,b)
+q
 
-  
+
