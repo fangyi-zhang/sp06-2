@@ -95,11 +95,9 @@ for (i in 1:length(b)) {
 }
 
 ##8
-index<-sample(g, 50, replace=FALSE)
+index <- sample(g, 50, replace = FALSE)
 s <- numeric(0)
 for (i in 1:50) {
-  s[i]<-k[index[i]]
+  s[i] <- k[index[i]]
 }
 cat(s)
-
-
