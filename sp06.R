@@ -38,5 +38,18 @@ for (i in 1:length(k2)) {
 
 (x-1000)<5
 
+g<-numeric(0)
+x=0
+for (i in 1:length(k2)) {
+  if (k2[i]>=90){
+    x=x+1;g[x]<-i}else 
+      {x=x+0}
+  
+}
+
+b<-numeric(0)
+for (i in 1:length(g)) {
+  b[i]<-c[g[i]]
+} 
 
   
