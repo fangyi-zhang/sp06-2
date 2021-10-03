@@ -88,3 +88,17 @@ for (i in 1:length(b)){
 
 sum(A[1,])
 
+##8
+index<-numeric(0)
+index[1]<-sample(1:length(b),1)
+for (i in 2:50){
+  index[i]<-sample(1:length(b),1,prob = A[index[i-1],])
+}
+index
+
+s<-numeric(0)
+for (i in 1:50) {
+  s[i]<-b[index[i]]
+}
+cat(s)
+
