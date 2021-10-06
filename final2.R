@@ -67,14 +67,14 @@ for (i in 1:length(g)) {
 b  ## Get the most frequent 1004 words in bible text
 
 ##7
-q <- match(text, b)   # Match the word in b with the original text. If the word in the original text is not in b, it is NA
-q1 <- cbind(q[1:length(q)-1], q[2:length(q)])   # q is mismatched to obtain a two column matrix, and each row represents a word pair
-q2 <- rowSums(is.na(q1))   # Calculate the phrase containing Na, Na = 1 (the word pair does not appear)
+q <- match(text, b)   ## Match the word in b with the original text. If the word in the original text is not in b, it is NA
+q1 <- cbind(q[1:length(q)-1], q[2:length(q)])   ## q is mismatched to obtain a two column matrix, and each row represents a word pair
+q2 <- rowSums(is.na(q1))   ## Calculate the phrase containing Na, Na = 1 (the word pair does not appear)
 
-l <- numeric(0)   # Define the index vector l to record the index of word pairs without NA
+l <- numeric(0)   ## Define the index vector l to record the index of word pairs without NA
 x <- 0
 for (i in 1:length(q2)) {
-  # Loop record the index of word pairs without NA and assign it to l
+  ## Loop record the index of word pairs without NA and assign it to l
   if (q2[i] == 0) { 
     x <- x + 1
     l[x] <- i
@@ -85,44 +85,44 @@ for (i in 1:length(q2)) {
   
 }
 
-q11 <- matrix(nrow = length(l), ncol = 2)   # Define matrix q11
+q11 <- matrix(nrow = length(l), ncol = 2)   ## Define matrix q11
 for (i in 1:length(l)) {
-  # Loop record possible word pairs and assign them to q11
+  ## Loop record possible word pairs and assign them to q11
   q11[i, ] <- q1[l[i], ]
 }
 
-A0 <- matrix(0, length(b), length(b))   # Define matrix A
+A0 <- matrix(0, length(b), length(b))   ## Define matrix A
 for (i in 1:length(q11) / 2) {
-  # Loop and count the number of occurrences of each word pair
+  ## Loop and count the number of occurrences of each word pair
   A0[q11[i, 1], q11[i, 2]] <- A0[q11[i, 1], q11[i, 2]] + 1
 }
 
 
-A <- matrix(0, length(b), length(b))   # Define matrix A storage conditional probability
+A <- matrix(0, length(b), length(b))   ## Define matrix A storage conditional probability
 for (i in 1:length(b)) {
-  # Loop and count the conditional probability
+  ## Loop and count the conditional probability
   for (j in 1:length(b)) {
     A[i, j] <- A0[i, j] / sum(A0[i, ])
   }
 }
-A   # The conditional probability matrix A is obtained
-sum(A[1,])==1   # Judge whether the sum of the probabilities of each line is 1
+A   ## The conditional probability matrix A is obtained
+sum(A[1,])==1   ## Judge whether the sum of the probabilities of each line is 1
 
 ##8
-index <- numeric(0)   # Define index vector named index
-index[1] <- sample(1:length(b), 1)   # A random index is taken as the sequence number of the first extracted word
+index <- numeric(0)   ## Define index vector named index
+index[1] <- sample(1:length(b), 1)   ## A random index is taken as the sequence number of the first extracted word
 for (i in 2:50) {
-  # Loop out the current word according to the probability of taking out the previous word
+  ## Loop out the current word according to the probability of taking out the previous word
   index[i] <- sample(1:length(b), 1, prob = A[index[i - 1], ])
 }
-index   # Get the index of 50 words
+index   ## Get the index of 50 words
 
-s <- numeric(0)   # Initializes a vector that records 50 words
+s <- numeric(0)   ## Initializes a vector that records 50 words
 for (i in 1:50) {
-  # Loop retrieve the words according to the index
+  ## Loop retrieve the words according to the index
   s[i] <- b[index[i]]   
 }
-cat(s)   # Print 50 words
+cat(s)   ## Print 50 words
 
 
 ##9
