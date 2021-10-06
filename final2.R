@@ -69,7 +69,7 @@ b  ## Get the most frequent 1004 words in bible text
 ##7
 q <- match(text, b)   ## Match the word in b with the original text. If the word in the original text is not in b, it is NA
 q1 <- cbind(q[1:length(q)-1], q[2:length(q)])   ## q is mismatched to obtain a two column matrix, and each row represents a word pair
-q2 <- rowSums(is.na(q1))   ## Calculate the phrase containing Na, Na = 1 (the word pair does not appear)
+q2 <- rowSums(is.na(q1))   ## Use rowsums to calculate the phrase containing Na, Na = 1 (the word pair does not appear)
 
 l <- numeric(0)   ## Define the index vector l to record the index of word pairs without NA
 x <- 0
@@ -112,7 +112,7 @@ sum(A[1,])==1   ## Judge whether the sum of the probabilities of each line is 1
 index <- numeric(0)   ## Define index vector named index
 index[1] <- sample(1:length(b), 1)   ## A random index is taken as the sequence number of the first extracted word
 for (i in 2:50) {
-  ## Loop out the current word according to the probability of taking out the previous word
+  ## Use sample to loop out the next word according to the probability of the previous word
   index[i] <- sample(1:length(b), 1, prob = A[index[i - 1], ])
 }
 index   ## Get the index of 50 words
