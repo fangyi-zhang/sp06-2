@@ -1,7 +1,7 @@
 ##3
-setwd("C:/Users/86132/Desktop/SP")  
-a <- scan("1581-0.txt",what="character",skip=156)
-n <- length(a)
+setwd("C:/Users/86132/Desktop/SP")   ## Set file path
+a <- scan("1581-0.txt",what="character",skip=156)   ## read file
+n <- length(a)   ## Find the number of words
 a <- a[-((n-2909):n)] ## strip license
 
 ##4
