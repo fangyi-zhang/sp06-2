@@ -127,15 +127,16 @@ cat(s)   ## Print 50 words
 
 ##9
 a_total <- match(text, b)   ## use match function to find the vector of indicies indicating which element in the unique word vector each element in the bible text corresponds to
-n_total <- tabulate(a_total)   ## count the frequency of the unique words 
-a_lower <- match(del_6, b)    ## find the vector of indicies indicating which element in the unique word vector each element in the bible text (not in lower case) corresponds to
-n_lower <- tabulate(a_lower)  ## count the frequency of the unique words; the aim of the four steps above is to find how many unique words are transferred from the upper case into the lower case
+n_total <- tabulate(a_total)   ## Count the total number of times unique words appear in biblical text in uppercase and lowercase
+a_lower <- match(del_6, b)    ## Find the identification vector to indicate the word corresponding to the Bible text (not lowercase) in the unique word vector
+n_lower <- tabulate(a_lower)  ## Count the number of times unique words appear in the Bible text in lowercase form
 
-P <- n_lower / n_total   ## calculate the ratio of unique words in the lower case to that in total
+P <- n_lower / n_total   ## Calculate the probability that unique words appear in lowercase
 
-ggg <- numeric(0)   ## creat a vector ggg whose length is 0
+ggg <- numeric(0)   ## Create a variable length vector ggg to record the index of the words appearing uppercase more
 x = 0
 for (i in 1:length(P)) {
+  ## loop record the index of words whose first letter is capitalized more than the first letter is lowercase
   if (P[i] < 0.5) {
     x = x + 1
     ggg[x] <- i
@@ -143,17 +144,19 @@ for (i in 1:length(P)) {
   {
     x = x + 0
   }
-}   ## use ggg vector to record the indicies of the unique words whose frequency of lower case is lower than that of the upper case
+}   
 
 # install.packages("Hmisc")
 library(Hmisc)
-B <- b
+B <- b   ## Initialize B with b
 for (i in 1:length(ggg)) {
-  B[ggg[i]] <- capitalize(b[ggg[i]])   ## import the library Hmisc to capitialize the lower-case unique words which have higher upper-case frequency in the bible text
+  ## Loop to capitalize the specified word in the unique word vector b
+  B[ggg[i]] <- capitalize(b[ggg[i]])   
 }
 
-s_new <- numeric(0)  ## creat a vector s_new whose length is 0
+s_new <- numeric(0)  ## Create a variable length vector s_new to record the new 50 words
 for (i in 1:50) {
-  s_new[i] <- B[index[i]]   ## simulate 50-word sections from the corrected model
+  ## Loop through 50 words in the new unique word B vector
+  s_new[i] <- B[index[i]]   
 }
-cat(s_new)
+cat(s_new)   ## print new 50 words
