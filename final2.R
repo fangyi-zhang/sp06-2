@@ -25,6 +25,8 @@ del_4 <- split_punct(del_3, '!')
 del_5 <- split_punct(del_4, ':')
 del_6 <- split_punct(del_5, "?")
 
+del_6
+
 ##6
 library(mgcv)
 text <- tolower(del_6)
@@ -57,6 +59,7 @@ b <- numeric(0)
 for (i in 1:length(g)) {
   b[i] <- k[g[i]]
 }
+b
 
 ##7
 q <- match(text, b)
@@ -93,7 +96,8 @@ for (i in 1:length(b)) {
     A[i, j] <- A0[i, j] / sum(A0[i, ])
   }
 }
-
+A
+sum(A[1,])==1
 
 ##8
 index <- numeric(0)
