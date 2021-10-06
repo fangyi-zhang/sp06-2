@@ -5,16 +5,16 @@ n <- length(a)   ## Find the number of words
 a <- a[-((n-2909):n)] ## strip license
 
 ##4
-split_punct <- function(book,string){
-  m <- grep(string, book, fixed=TRUE)
-  book[m] <- paste(book[m], " %", sep="")
-  n <- paste(book, collapse=" ")
-  p <- strsplit(n," ")[[1]]
+split_punct <- function(book,string){   ## This function takes a string of words and a chosen punctuation mark as input, and outputs a vector which takes every word and the given punctuation mark as a single entry.  
+  m <- grep(string, book, fixed=TRUE)   ## use grep function to find the indices of the string (here is the given punctuation mark) in the book input
+  book[m] <- paste(book[m], " %", sep="")   ## The paste function joins every input punctuation mark with ‘%’ with no separator for the convenience of subsequent substitution and deletion
+  n <- paste(book, collapse=" ")   ## put the words in book into a single string (no split strings)
+  p <- strsplit(n," ")[[1]]   ## split n into a vector of its individual words; [[1]] indicates that there is only one element in the list
   t <- gsub(string, "", p, ignore.case = FALSE, perl = FALSE,
-            fixed = TRUE, useBytes = FALSE)
+            fixed = TRUE, useBytes = FALSE)   ## strip out the string entries in p
   t1 <- gsub("%", string, t, ignore.case = FALSE, perl = FALSE,
-             fixed = TRUE, useBytes = FALSE)
-  return (t1)
+             fixed = TRUE, useBytes = FALSE)   ## substitute the entry '%' into string (punctuation mark) in order to add the punctuation mark as a new entry
+  return (t1)   ## return the output
 }
 
 ##5
@@ -126,14 +126,14 @@ cat(s)   ## Print 50 words
 
 
 ##9
-a_total <- match(text, b)
-n_total <- tabulate(a_total)
-a_lower <- match(del_6, b)
-n_lower <- tabulate(a_lower)
+a_total <- match(text, b)   ## use match function to find the vector of indicies indicating which element in the unique word vector each element in the bible text corresponds to
+n_total <- tabulate(a_total)   ## count the frequency of the unique words 
+a_lower <- match(del_6, b)    ## find the vector of indicies indicating which element in the unique word vector each element in the bible text (not in lower case) corresponds to
+n_lower <- tabulate(a_lower)  ## count the frequency of the unique words; the aim of the four steps above is to find how many unique words are transferred from the upper case into the lower case
 
-P <- n_lower / n_total
+P <- n_lower / n_total   ## calculate the ratio of unique words in the lower case to that in total
 
-ggg <- numeric(0)
+ggg <- numeric(0)   ## creat a vector ggg whose length is 0
 x = 0
 for (i in 1:length(P)) {
   if (P[i] < 0.5) {
@@ -143,17 +143,17 @@ for (i in 1:length(P)) {
   {
     x = x + 0
   }
-}
+}   ## use ggg vector to record the indicies of the unique words whose frequency of lower case is lower than that of the upper case
 
 # install.packages("Hmisc")
 library(Hmisc)
 B <- b
 for (i in 1:length(ggg)) {
-  B[ggg[i]] <- capitalize(b[ggg[i]])
+  B[ggg[i]] <- capitalize(b[ggg[i]])   ## import the library Hmisc to capitialize the lower-case unique words which have higher upper-case frequency in the bible text
 }
 
-s_new <- numeric(0)
+s_new <- numeric(0)  ## creat a vector s_new whose length is 0
 for (i in 1:50) {
-  s_new[i] <- B[index[i]]
+  s_new[i] <- B[index[i]]   ## simulate 50-word sections from the corrected model
 }
 cat(s_new)
