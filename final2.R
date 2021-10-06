@@ -18,33 +18,37 @@ split_punct <- function(book,string){
 }
 
 ##5
-del_1 <- split_punct(a, ',')
-del_2 <- split_punct(del_1, '.')
-del_3 <- split_punct(del_2, ';')
-del_4 <- split_punct(del_3, '!')
-del_5 <- split_punct(del_4, ':')
+## From words they are attached to in the bible text
+## Use split_punct function to separate the punctuation marks, ",", ".", ";", "!", ":" and "?"
+del_1 <- split_punct(a, ',')   
+del_2 <- split_punct(del_1, '.')   
+del_3 <- split_punct(del_2, ';')   
+del_4 <- split_punct(del_3, '!')   
+del_5 <- split_punct(del_4, ':')   
 del_6 <- split_punct(del_5, "?")
 
-del_6
+del_6   ## The final text after separating symbols to make them independent
 
 ##6
 library(mgcv)
-text <- tolower(del_6)
-k <- unique(text, ordered = FALSE)
-k1 <- match(text, k)
-k2 <- tabulate(k1)
+text <- tolower(del_6)   ## Use "tolower" to replace the capital letters in words with lower case letters
+k <- unique(text, ordered = FALSE)   ## Use "unique" to find the vector of unique words
+k1 <- match(text, k)  ## Use "match" to find the vector of indicies indicating which element in the unique word vector eachelement in the (lower case) bible text corresponds to
+k2 <- tabulate(k1)  ## Use "tabulate" to count up how many times each unique word occurs in the text
 
-x <- 0
+m <- 0
 for (i in 1:length(k2)) {
-  if (k2[i] > 89)
-    x = x + 1
+  ## Decide 90 as the threshold
+  ## Count the number of words that appear more than or equal to 90 
+  if (k2[i] >=90)
+    m = m + 1
 }
-
-(x - 1000) < 5 #true
+m  ## Find that there are 1004 words with the number of occurrences greater than or equal to 90
 
 g <- numeric(0)
 x <- 0
 for (i in 1:length(k2)) {
+  ## Find the index of the most frequent 1004 words in the separated symbol text
   if (k2[i] >= 90) {
     x <- x + 1
     g[x] <- i
@@ -57,9 +61,10 @@ for (i in 1:length(k2)) {
 
 b <- numeric(0)
 for (i in 1:length(g)) {
+  ## Create vector b, put the most frequent 1004 words into it through index
   b[i] <- k[g[i]]
 }
-b
+b  ## Get the most frequent 1004 words in bible text
 
 ##7
 q <- match(text, b)   # Match the word in b with the original text. If the word in the original text is not in b, it is NA
@@ -121,10 +126,10 @@ cat(s)   # Print 50 words
 
 
 ##9
-m_total<-match(text,b) 
-n_total<-tabulate(m_total)
-m_lower<-match(del_6,b) 
-n_lower<-tabulate(m_lower) 
+a_total<-match(text,b) 
+n_total<-tabulate(a_total)
+a_lower<-match(del_6,b) 
+n_lower<-tabulate(a_lower) 
 
 P<-n_lower/n_total   
 
