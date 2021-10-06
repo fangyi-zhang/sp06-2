@@ -5,17 +5,19 @@ n <- length(a)   ## Find the number of words
 a <- a[-((n-2909):n)] ## strip license
 
 ##4
-split_punct <- function(book,string){   ## This function takes a string of words and a chosen punctuation mark as input, and outputs a vector which takes every word and the given punctuation mark as a single entry.  
-  m <- grep(string, book, fixed=TRUE)   ## use grep function to find the indices of the string (here is the given punctuation mark) in the book input
-  book[m] <- paste(book[m], " %", sep="")   ## The paste function joins every input punctuation mark with ‘%’ with no separator for the convenience of subsequent substitution and deletion
-  n <- paste(book, collapse=" ")   ## put the words in book into a single string (no split strings)
-  p <- strsplit(n," ")[[1]]   ## split n into a vector of its individual words; [[1]] indicates that there is only one element in the list
+split_punct <- function(book,string){   
+  ## Search for each word containing the punctuation mark, remove it from the word, and add the mark as a new entry in the vector of words, after the word it came from 
+  l <- grep(string, book, fixed=TRUE)   ## Use "grep" function to find the index containing the "string" punctuation mark in the "book"
+  book[l] <- paste(book[l], " %", sep="")   ## Use "paste" function to add “ %” after each found "string" 
+  n <- paste(book, collapse=" ")   ## Put the words in “book” into a single string with “ ” between two words
+  p <- strsplit(n," ")[[1]]   ## Use "strsplit" to split n into individual words by “ ”
   t <- gsub(string, "", p, ignore.case = FALSE, perl = FALSE,
-            fixed = TRUE, useBytes = FALSE)   ## strip out the string entries in p
+            fixed = TRUE, useBytes = FALSE)   ## Find “string” in p and replace with “”
   t1 <- gsub("%", string, t, ignore.case = FALSE, perl = FALSE,
-             fixed = TRUE, useBytes = FALSE)   ## substitute the entry '%' into string (punctuation mark) in order to add the punctuation mark as a new entry
+             fixed = TRUE, useBytes = FALSE)   ## Find “%” in t and replace with “string”
   return (t1)   ## return the output
 }
+
 
 ##5
 ## From words they are attached to in the bible text
