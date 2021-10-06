@@ -126,30 +126,34 @@ cat(s)   ## Print 50 words
 
 
 ##9
-a_total<-match(text,b) 
-n_total<-tabulate(a_total)
-a_lower<-match(del_6,b) 
-n_lower<-tabulate(a_lower) 
+a_total <- match(text, b)
+n_total <- tabulate(a_total)
+a_lower <- match(del_6, b)
+n_lower <- tabulate(a_lower)
 
-P<-n_lower/n_total   
+P <- n_lower / n_total
 
-ggg<-numeric(0)
-x=0
+ggg <- numeric(0)
+x = 0
 for (i in 1:length(P)) {
-  if (P[i]<0.5){
-    x=x+1;ggg[x]<-i}else 
-    {x=x+0}
+  if (P[i] < 0.5) {
+    x = x + 1
+    ggg[x] <- i
+  } else
+  {
+    x = x + 0
+  }
 }
 
 # install.packages("Hmisc")
 library(Hmisc)
-B<-b
+B <- b
 for (i in 1:length(ggg)) {
-  B[ggg[i]]<-capitalize(b[ggg[i]])
-} 
+  B[ggg[i]] <- capitalize(b[ggg[i]])
+}
 
-s_new<-numeric(0)
+s_new <- numeric(0)
 for (i in 1:50) {
-  s_new[i]<-B[index[i]]
+  s_new[i] <- B[index[i]]
 }
 cat(s_new)
