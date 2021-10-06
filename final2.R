@@ -121,6 +121,7 @@ m_lower<-match(del_6,b)
 n_lower<-tabulate(w1) 
 
 P<-n_lower/n_total   
+P
 
 ggg<-numeric(0)
 x=0
